@@ -4,6 +4,7 @@
     "type": "module",
     "description": "A wrapper around `crypto.subtle` with a simple API",
     "main": "index.js",
+    "exports": "./index.js",
     "scripts": {
         "test": "ava",
         "watch": "ava --watch"
