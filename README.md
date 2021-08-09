@@ -12,7 +12,7 @@ AES-GCM uses an initialization vector (iv) to randomise the encryption. Each enc
 ## How to install
 
 ```
-npm install --save-dev https://github.com/geoffreyTools/encryption.git
+npm install https://github.com/geoffreyTools/encryption.git
 ```
 
 ## How to use
