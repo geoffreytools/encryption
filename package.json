@@ -1,0 +1,21 @@
+{
+    "name": "encryption",
+    "version": "1.0.0",
+    "type": "module",
+    "description": "A wrapper around `crypto.subtle` with a simple API",
+    "main": "index.js",
+    "scripts": {
+        "test": "ava",
+        "watch": "ava --watch"
+    },
+    "ava": {
+        "files": [
+            "test/**"
+        ]
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "ava": "^3.15.0"
+    }
+}
