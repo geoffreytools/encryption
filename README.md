@@ -1,6 +1,6 @@
 # encryption
 
-A wrapper around `crypto.subtle` with a simple API which the following features:
+A wrapper around `crypto.subtle` with a simple API with the following features:
 - derive a key from a password with PBKDF2
 - or generate a single use random key
 - encrypt text with AES in Galois/Counter Mode.
