@@ -53,12 +53,14 @@ const { encrypt, decrypt } = encryption(password, salt);
 
 The salt is required for persistance if you supply a password.
 ### Return value
-- `{ encrypt, decrypt}`
-```
-const encrypted = encrypt(message);
-```
-`encrypt`: a function seeded with the encryption key which accepts a String to encrypt and returns a `Promise` of a `{cipher, iv}` pair (which are base64 encoded Strings).
-```
-const decrypted = decrypt({ cipher, iv });
-```
-`decrypt`: a function seeded with the encryption key which returns a `Promise` of a String.
+a plain `{ encrypt, decrypt }` object.
+
+- `encrypt`: a function seeded with the encryption key which accepts a String to encrypt and returns a `Promise` of a `{ cipher, iv }` pair (which are base64 encoded Strings).
+    ```
+    const { cipher, iv } = encrypt(message);
+    ```
+
+- `decrypt`: a function seeded with the encryption key which returns a `Promise` of a String.
+    ```
+    const decrypted = decrypt({ cipher, iv });
+    ```
