@@ -10,7 +10,6 @@ test('Encrypting a message makes it unlegible', async t => {
 test('decrypting a cypher makes it legible again', async t => {
     const { encrypt, decrypt } = encryption();
     const original = 'foobar';
-    const { cypher, iv } = await encrypt(original);
-    const decrypted = await decrypt(cypher, iv);
+    const decrypted = await encrypt(original).then(decrypt);
     t.is(original, decrypted);
 });

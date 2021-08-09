@@ -12,7 +12,7 @@ test('the key can be reused', async t => {
 
     // second use
     const { decrypt } = encryption(password, salt);
-    const decrypted = await decrypt(cypher, iv);
+    const decrypted = await decrypt({ cypher, iv });
 
     t.is(original, decrypted);
 });
@@ -24,10 +24,10 @@ test(`using the wrong password won't decrypt a cypher`, async t => {
 
     // second use
     const { decrypt } = encryption(password + '1', salt);
-    const decrypted = await decrypt(cypher, iv);
+    const decrypted = await decrypt({ cypher, iv });
 
     t.throws(
-        () => decrypt(cypher, iv),
+        () => decrypt({ cypher, iv }),
         { message: 'decryption failed' }
     );
 });
@@ -40,10 +40,10 @@ test(`using the wrong salt won't decrypt a cypher`, async t => {
 
     // second use
     const { decrypt } = encryption(password, generateSalt());
-    const decrypted = await decrypt(cypher, iv);
+    const decrypted = await decrypt({ cypher, iv });
 
     t.throws(
-        () => decrypt(cypher, iv),
+        () => decrypt({ cypher, iv }),
         { message: 'decryption failed' }
     );
 });

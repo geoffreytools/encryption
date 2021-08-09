@@ -64,7 +64,7 @@ const decryption = {
         crypto.subtle.decrypt({name: 'AES-GCM', iv}, key, cipher),
 
 
-    read: futureKey => (cipher, iv) => 
+    read: futureKey => ({cipher, iv}) => 
         futureKey
             .then(key => decryption.decrypt(
                 unpack(cipher), key, unpack(iv)))
