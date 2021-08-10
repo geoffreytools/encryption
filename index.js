@@ -12,10 +12,10 @@ const unpack = packed => {
     return view.map((_, i) => string.charCodeAt(i));
 };
 
-const keyDerivationAlgorithm = salt => ({
+const keyDerivationAlgorithm = (salt, iterations = 1000000) => ({
     name: "PBKDF2",
     salt,
-    iterations: 100000,
+    iterations,
     hash: "SHA-256"
 });
 
@@ -44,11 +44,11 @@ const key = {
             ["deriveBits", "deriveKey"]
         ),
 
-    deriveFrom: (password, salt = generateSalt()) => 
+    deriveFrom: (password, salt = generateSalt(), iterations) => 
         key.import(password)
             .then(imported =>
                 crypto.subtle.deriveKey(
-                    keyDerivationAlgorithm(unpack(salt)),
+                    keyDerivationAlgorithm(unpack(salt), iterations),
                     imported,
                     encryptionAlgorithm,
                     extractable,
@@ -95,9 +95,9 @@ const encryption = {
     }
 };
 
-export default (password, salt) => {
+export default (password, salt, iterations) => {
     const futureKey = password !== undefined
-        ? key.deriveFrom(password, salt)
+        ? key.deriveFrom(password, salt, iterations)
         : key.generate();
     
     return {
