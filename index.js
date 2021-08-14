@@ -44,6 +44,9 @@ const key = {
             ["deriveBits", "deriveKey"]
         ),
 
+    export: key => 
+        crypto.subtle.exportKey("raw", key).then(pack),
+
     deriveFrom: (password, salt = generateSalt(), iterations) => 
         key.import(password)
             .then(imported =>
@@ -94,6 +97,24 @@ const encryption = {
             }));
     }
 };
+
+export const pbkdf2Hash = (password, salt, iterations) =>
+    key.import(password)
+        .then(imported => {
+            const extractable = true;
+            const keyUsages = [];
+            return crypto.subtle.deriveKey(
+                keyDerivationAlgorithm(unpack(salt), iterations),
+                imported,
+                encryptionAlgorithm,
+                extractable,
+                keyUsages
+            )
+        })
+        .then(key.export)
+
+
+      
 
 export default (password, salt, iterations) => {
     const futureKey = password !== undefined
