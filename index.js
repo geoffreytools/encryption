@@ -102,7 +102,6 @@ export const pbkdf2Hash = (password, salt, iterations) =>
     key.import(password)
         .then(imported => {
             const extractable = true;
-            const keyUsages = [];
             return crypto.subtle.deriveKey(
                 keyDerivationAlgorithm(unpack(salt), iterations),
                 imported,
